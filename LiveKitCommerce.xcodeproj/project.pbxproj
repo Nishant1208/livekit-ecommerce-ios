@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5ACC26FA2F5371A5009BB459 /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5ACC26F92F5371A5009BB459 /* LiveKit */; };
+		5ACC26FD2F537217009BB459 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5ACC26FC2F537217009BB459 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		5ACC26DB2F536F87009BB459 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ACC26FD2F537217009BB459 /* Kingfisher in Frameworks */,
+				5ACC26FA2F5371A5009BB459 /* LiveKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +132,8 @@
 			);
 			name = LiveKitCommerce;
 			packageProductDependencies = (
+				5ACC26F92F5371A5009BB459 /* LiveKit */,
+				5ACC26FC2F537217009BB459 /* Kingfisher */,
 			);
 			productName = LiveKitCommerce;
 			productReference = 5ACC26C42F536F85009BB459 /* LiveKitCommerce.app */;
@@ -208,6 +217,10 @@
 			);
 			mainGroup = 5ACC26BB2F536F85009BB459;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5ACC26F82F5371A5009BB459 /* XCRemoteSwiftPackageReference "client-sdk-swift" */,
+				5ACC26FB2F537217009BB459 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5ACC26C52F536F85009BB459 /* Products */;
 			projectDirPath = "";
@@ -292,6 +305,8 @@
 				DEVELOPMENT_TEAM = 52W9NB8892;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveKitCommerce/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is required for video consultation.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone is required for live shopping assistant.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -320,6 +335,8 @@
 				DEVELOPMENT_TEAM = 52W9NB8892;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LiveKitCommerce/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is required for video consultation.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone is required for live shopping assistant.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -571,6 +588,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5ACC26F82F5371A5009BB459 /* XCRemoteSwiftPackageReference "client-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/livekit/client-sdk-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.12.1;
+			};
+		};
+		5ACC26FB2F537217009BB459 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5ACC26F92F5371A5009BB459 /* LiveKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5ACC26F82F5371A5009BB459 /* XCRemoteSwiftPackageReference "client-sdk-swift" */;
+			productName = LiveKit;
+		};
+		5ACC26FC2F537217009BB459 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5ACC26FB2F537217009BB459 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5ACC26BC2F536F85009BB459 /* Project object */;
 }
