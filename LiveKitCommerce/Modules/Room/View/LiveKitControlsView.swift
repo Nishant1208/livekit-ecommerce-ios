@@ -197,9 +197,12 @@ final class LiveKitControlsView: UIView {
         // Initial state
         flipButton.isHidden = true
 
-        CartManager.shared.onItemsChanged = { [weak self] in
-            DispatchQueue.main.async { self?.updateCartBadge() }
-        }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(cartDidChange),
+            name: .cartDidChange,
+            object: nil
+        )
     }
 
     // MARK: - Public Update Methods
@@ -257,6 +260,11 @@ final class LiveKitControlsView: UIView {
         }
     }
 
+    /// Returns the cart button's frame in window coordinates (for fly-to-cart animation).
+    func cartButtonFrameInWindow() -> CGRect {
+        cartButton.convert(cartButton.bounds, to: nil)
+    }
+
     func animateCartBadgeBounce() {
         updateCartBadge()
         UIView.animate(withDuration: 0.12, animations: {
@@ -269,6 +277,10 @@ final class LiveKitControlsView: UIView {
     }
 
     // MARK: - Cart Badge
+
+    @objc private func cartDidChange() {
+        updateCartBadge()
+    }
 
     private func updateCartBadge() {
         let count = CartManager.shared.itemCount

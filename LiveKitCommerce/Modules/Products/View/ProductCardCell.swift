@@ -19,6 +19,9 @@ final class ProductCardCell: UICollectionViewCell {
     weak var delegate: ProductCardCellDelegate?
     private(set) var product: Product?
 
+    /// Exposed for shared-element transition
+    var productImageView: UIImageView { imageView }
+
     // MARK: - Subviews
 
     private let imageView: UIImageView = {
