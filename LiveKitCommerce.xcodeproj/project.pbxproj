@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5AB4EEB72F54338900D01153 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5AB4EEB62F54338900D01153 /* Lottie */; };
-		5AB4EEB92F54338900D01153 /* Lottie-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 5AB4EEB82F54338900D01153 /* Lottie-Dynamic */; };
 		5ACC26FA2F5371A5009BB459 /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5ACC26F92F5371A5009BB459 /* LiveKit */; };
 		5ACC26FD2F537217009BB459 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5ACC26FC2F537217009BB459 /* Kingfisher */; };
 /* End PBXBuildFile section */
@@ -29,6 +28,19 @@
 			remoteInfo = LiveKitCommerce;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5A046C802F543F69002A2499 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5ACC26C42F536F85009BB459 /* LiveKitCommerce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveKitCommerce.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +85,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ACC26FD2F537217009BB459 /* Kingfisher in Frameworks */,
-				5AB4EEB92F54338900D01153 /* Lottie-Dynamic in Frameworks */,
 				5ACC26FA2F5371A5009BB459 /* LiveKit in Frameworks */,
 				5AB4EEB72F54338900D01153 /* Lottie in Frameworks */,
 			);
@@ -126,6 +137,7 @@
 				5ACC26C02F536F85009BB459 /* Sources */,
 				5ACC26C12F536F85009BB459 /* Frameworks */,
 				5ACC26C22F536F85009BB459 /* Resources */,
+				5A046C802F543F69002A2499 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,7 +151,6 @@
 				5ACC26F92F5371A5009BB459 /* LiveKit */,
 				5ACC26FC2F537217009BB459 /* Kingfisher */,
 				5AB4EEB62F54338900D01153 /* Lottie */,
-				5AB4EEB82F54338900D01153 /* Lottie-Dynamic */,
 			);
 			productName = LiveKitCommerce;
 			productReference = 5ACC26C42F536F85009BB459 /* LiveKitCommerce.app */;
@@ -628,11 +639,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5AB4EEB52F54338900D01153 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		5AB4EEB82F54338900D01153 /* Lottie-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5AB4EEB52F54338900D01153 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = "Lottie-Dynamic";
 		};
 		5ACC26F92F5371A5009BB459 /* LiveKit */ = {
 			isa = XCSwiftPackageProductDependency;

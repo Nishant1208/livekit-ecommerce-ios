@@ -17,53 +17,56 @@ final class LiveKitManager {
     private var localAudioTrack: LocalAudioTrack?
 
     private let liveKitURL = "wss://virtualshoppingapp-oxlt3ddi.livekit.cloud"
-
     private let token = "GENERATE_TOKEN_HERE"
 
     private init() {}
 
-    func connect(completion: @escaping (Result<Void, Error>) -> Void) {
-        room = Room()
+    func connect(identity: String,
+                 completion: @escaping (Result<Void, Error>) -> Void) {
+
+        let newRoom = Room()
+        room = newRoom
 
         Task {
             do {
-                try await room?.connect(url: liveKitURL, token: token)
-                print("✅ Room connected successfully")
+                try await newRoom.connect(url: liveKitURL, token: token)
+                try await publishAudio()
 
-                publishAudio()
+                await MainActor.run {
+                    completion(.success(()))
+                }
 
-                completion(.success(()))
             } catch {
-                print("❌ Room connection failed:", error)
-                completion(.failure(error))
+                await MainActor.run {
+                    completion(.failure(error))
+                }
             }
         }
     }
 
-    private func publishAudio() {
-        AVAudioSession.sharedInstance().requestRecordPermission { granted in
-            if !granted {
-                print("❌ Microphone permission denied")
-                return
-            }
+    func disconnect() async {
+        if let room = room {
+            await room.disconnect()
+        }
+        room = nil
+        localAudioTrack = nil
+    }
 
-            Task {
-                do {
-                    try AVAudioSession.sharedInstance().setCategory(.playAndRecord)
-                    try AVAudioSession.sharedInstance().setActive(true)
+    private func publishAudio() async throws {
 
-                    self.localAudioTrack = try await LocalAudioTrack.createTrack()
+        guard let room = room else {
+            throw NSError(domain: "LiveKit",
+                          code: -1,
+                          userInfo: [NSLocalizedDescriptionKey: "Room not initialized"])
+        }
 
-                    if let audioTrack = self.localAudioTrack {
-                        try await self.room?.localParticipant.publish(audioTrack: audioTrack)
-                    }
+        try AVAudioSession.sharedInstance().setCategory(.playAndRecord)
+        try AVAudioSession.sharedInstance().setActive(true)
 
-                    print("🎤 Audio published successfully")
+        localAudioTrack = try await LocalAudioTrack.createTrack()
 
-                } catch {
-                    print("❌ Audio publish error:", error)
-                }
-            }
+        if let audioTrack = localAudioTrack {
+            try await room.localParticipant.publish(audioTrack: audioTrack)
         }
     }
 }
