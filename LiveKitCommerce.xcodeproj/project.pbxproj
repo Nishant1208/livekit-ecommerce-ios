@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5AB4EEB72F54338900D01153 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5AB4EEB62F54338900D01153 /* Lottie */; };
+		5AB4EEB92F54338900D01153 /* Lottie-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 5AB4EEB82F54338900D01153 /* Lottie-Dynamic */; };
 		5ACC26FA2F5371A5009BB459 /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5ACC26F92F5371A5009BB459 /* LiveKit */; };
 		5ACC26FD2F537217009BB459 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5ACC26FC2F537217009BB459 /* Kingfisher */; };
 /* End PBXBuildFile section */
@@ -71,7 +73,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ACC26FD2F537217009BB459 /* Kingfisher in Frameworks */,
+				5AB4EEB92F54338900D01153 /* Lottie-Dynamic in Frameworks */,
 				5ACC26FA2F5371A5009BB459 /* LiveKit in Frameworks */,
+				5AB4EEB72F54338900D01153 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +138,8 @@
 			packageProductDependencies = (
 				5ACC26F92F5371A5009BB459 /* LiveKit */,
 				5ACC26FC2F537217009BB459 /* Kingfisher */,
+				5AB4EEB62F54338900D01153 /* Lottie */,
+				5AB4EEB82F54338900D01153 /* Lottie-Dynamic */,
 			);
 			productName = LiveKitCommerce;
 			productReference = 5ACC26C42F536F85009BB459 /* LiveKitCommerce.app */;
@@ -220,6 +226,7 @@
 			packageReferences = (
 				5ACC26F82F5371A5009BB459 /* XCRemoteSwiftPackageReference "client-sdk-swift" */,
 				5ACC26FB2F537217009BB459 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				5AB4EEB52F54338900D01153 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5ACC26C52F536F85009BB459 /* Products */;
@@ -309,7 +316,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone is required for live shopping assistant.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -339,7 +346,7 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone is required for live shopping assistant.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -590,6 +597,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5AB4EEB52F54338900D01153 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.0;
+			};
+		};
 		5ACC26F82F5371A5009BB459 /* XCRemoteSwiftPackageReference "client-sdk-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/livekit/client-sdk-swift";
@@ -609,6 +624,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5AB4EEB62F54338900D01153 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AB4EEB52F54338900D01153 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		5AB4EEB82F54338900D01153 /* Lottie-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AB4EEB52F54338900D01153 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = "Lottie-Dynamic";
+		};
 		5ACC26F92F5371A5009BB459 /* LiveKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5ACC26F82F5371A5009BB459 /* XCRemoteSwiftPackageReference "client-sdk-swift" */;
