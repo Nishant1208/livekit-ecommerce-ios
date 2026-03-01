@@ -14,7 +14,7 @@ final class LiveKitManager: NSObject {
     static let shared = LiveKitManager()
 
     private(set) var room: Room?
-    private var localAudioTrack: LocalAudioTrack?
+    var localAudioTrack: LocalAudioTrack?
 
     // MARK: - Credentials
 
@@ -59,6 +59,14 @@ final class LiveKitManager: NSObject {
                     completion(.failure(error))
                 }
             }
+        }
+    }
+
+    func setMicMuted(_ muted: Bool) async {
+        if muted {
+            try? await localAudioTrack?.mute()
+        } else {
+            try? await localAudioTrack?.unmute()
         }
     }
 

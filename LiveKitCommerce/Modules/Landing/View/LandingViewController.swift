@@ -84,6 +84,11 @@ final class LandingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        // Reset to idle when returning from the room screen
+        if case .connected = viewModel.state {
+            viewModel.disconnect()
+        }
+        view.alpha = 1  // restore if we left with a fade animation
     }
 
     deinit {
@@ -403,9 +408,8 @@ final class LandingViewController: UIViewController {
 
     @IBAction private func continueTapped(_ sender: UIButton) {
         animateButtonPress(sender) { [weak self] in
-            // TODO: Navigate to the Main Shopping Room screen.
-            // Will be implemented in the next phase.
-            print("[LandingVC] Navigate to Room Screen")
+            let roomVC = RoomViewController()
+            self?.navigationController?.pushViewController(roomVC, animated: true)
         }
     }
 
