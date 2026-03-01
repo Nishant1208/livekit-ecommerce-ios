@@ -28,6 +28,17 @@ final class ToastView: UIView {
         return lbl
     }()
 
+    private let actionButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.titleLabel?.font = .systemFont(ofSize: 13, weight: .bold)
+        btn.setTitleColor(AppColors.accent, for: .normal)
+        btn.isHidden = true
+        return btn
+    }()
+
+    private var actionHandler: (() -> Void)?
+
     // MARK: - Init
 
     private init(message: String, iconName: String, iconColor: UIColor) {
@@ -45,11 +56,14 @@ final class ToastView: UIView {
 
         addSubview(iconView)
         addSubview(messageLabel)
+        addSubview(actionButton)
 
         let cfg = UIImage.SymbolConfiguration(pointSize: 15, weight: .semibold)
         iconView.image = UIImage(systemName: iconName, withConfiguration: cfg)
         iconView.tintColor = iconColor
         messageLabel.text = message
+
+        actionButton.addTarget(self, action: #selector(actionTapped), for: .touchUpInside)
 
         NSLayoutConstraint.activate([
             blur.topAnchor.constraint(equalTo: topAnchor),
@@ -63,14 +77,28 @@ final class ToastView: UIView {
             iconView.heightAnchor.constraint(equalToConstant: 20),
 
             messageLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 10),
-            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             messageLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+
+            actionButton.leadingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 8),
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            actionButton.centerYAnchor.constraint(equalTo: centerYAnchor),
 
             heightAnchor.constraint(equalToConstant: 44),
         ])
+
+        // messageLabel should not push the action button off screen
+        messageLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 
     required init?(coder: NSCoder) { fatalError() }
+
+    @objc private func actionTapped() {
+        actionHandler?()
+        // Dismiss immediately
+        UIView.animate(withDuration: 0.2, animations: { self.alpha = 0 }) { _ in
+            self.removeFromSuperview()
+        }
+    }
 
     // MARK: - Public Show
 
@@ -116,6 +144,50 @@ final class ToastView: UIView {
         }, completion: { _ in
             toast.removeFromSuperview()
         })
+        }
+
+        return toast
+    }
+
+    /// Shows a toast with a tappable action button (e.g. "Undo"). Dismissed on action tap or after duration.
+    @discardableResult
+    static func showWithAction(
+        message: String,
+        actionTitle: String,
+        icon: String = "trash.fill",
+        iconColor: UIColor = AppColors.error,
+        in view: UIView,
+        duration: TimeInterval = 3.5,
+        action: @escaping () -> Void
+    ) -> ToastView {
+        let toast = ToastView(message: message, iconName: icon, iconColor: iconColor)
+        toast.actionButton.setTitle(actionTitle, for: .normal)
+        toast.actionButton.isHidden = false
+        toast.actionHandler = action
+        view.addSubview(toast)
+
+        NSLayoutConstraint.activate([
+            toast.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            toast.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            toast.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 24),
+            toast.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -24),
+        ])
+
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+        toast.alpha = 0
+        toast.transform = CGAffineTransform(translationX: 0, y: 20)
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, animations: {
+            toast.alpha = 1
+            toast.transform = .identity
+        })
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            guard toast.superview != nil else { return }
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+                toast.alpha = 0
+                toast.transform = CGAffineTransform(translationX: 0, y: -10)
+            }, completion: { _ in toast.removeFromSuperview() })
         }
 
         return toast

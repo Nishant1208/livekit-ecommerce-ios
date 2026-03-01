@@ -24,6 +24,13 @@ final class CartManager {
     var itemCount: Int      { items.reduce(0) { $0 + $1.quantity } }
     var isEmpty: Bool       { items.isEmpty }
 
+    var totalSavings: Double {
+        items.reduce(0) { total, item in
+            guard let original = item.product.originalPrice else { return total }
+            return total + (original - item.product.price) * Double(item.quantity)
+        }
+    }
+
     // MARK: - Actions
 
     func add(_ product: Product) {
@@ -50,6 +57,13 @@ final class CartManager {
 
     func clear() {
         items.removeAll()
+        notify()
+    }
+
+    /// Re-inserts a previously removed CartItem exactly (preserving quantity). Used for undo.
+    func restore(_ item: CartItem) {
+        items.removeAll { $0.product == item.product }
+        items.append(item)
         notify()
     }
 
