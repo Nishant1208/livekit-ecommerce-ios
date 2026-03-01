@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingViewController" customModule="LiveKitCommerce" customModuleProvider="target">
             <connections>
+                <outlet property="audioLevelContainer" destination="L1b-7P-yGN" id="aLV-c0-ntR"/>
                 <outlet property="connectedView" destination="ZG1-54-aTi" id="neY-ck-4CZ"/>
                 <outlet property="connectingAnimationContainer" destination="oYr-Zb-zIf" id="U8f-Wb-ghg"/>
                 <outlet property="connectingView" destination="gLx-7R-dme" id="ve5-UI-gLJ"/>
@@ -17,7 +18,9 @@
                 <outlet property="continueButton" destination="Kcg-ao-WWi" id="KfT-SA-zrD"/>
                 <outlet property="continueButtonContainer" destination="dfd-uS-gjC" id="zTr-ms-iJK"/>
                 <outlet property="disconnectButton" destination="lk4-jd-KBb" id="X9M-C4-79n"/>
+                <outlet property="errorIconImageView" destination="1iG-Fi-4Ou" id="eRR-Ic-0n1"/>
                 <outlet property="errorMessageLabel" destination="MdC-7M-Fkh" id="fIb-Ow-jE7"/>
+                <outlet property="errorTitleLabel" destination="PhQ-Yo-DU0" id="eTL-ab-1R0"/>
                 <outlet property="errorView" destination="exa-M4-KU7" id="Xfe-O1-9ge"/>
                 <outlet property="idleView" destination="rWe-z8-qRV" id="nf9-7w-N8m"/>
                 <outlet property="nameTextField" destination="lcS-pI-n7j" id="Hmv-EL-uLW"/>
@@ -310,7 +313,7 @@ This may take a moment</string>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exa-M4-KU7" userLabel="ErrorView">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="666"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1iG-Fi-4Ou">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_error" translatesAutoresizingMaskIntoConstraints="NO" id="1iG-Fi-4Ou">
                                     <rect key="frame" x="160.66666666666666" y="48" width="72" height="72"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="72" id="46a-s2-GTz"/>
@@ -429,6 +432,7 @@ This may take a moment</string>
         </view>
     </objects>
     <resources>
+        <image name="ic_error" width="72" height="72"/>
         <image name="landing_bg" width="375" height="812"/>
         <image name="logo_icon" width="72" height="72"/>
         <systemColor name="systemBackgroundColor">

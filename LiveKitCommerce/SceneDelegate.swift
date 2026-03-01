@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let landingVC = LandingViewController()
+        let landingVC = LandingViewController(nibName: "LandingViewController", bundle: nil)
         let navigationController = UINavigationController(rootViewController: landingVC)
 
         window.rootViewController = navigationController
